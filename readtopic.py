@@ -26,7 +26,7 @@ if __name__ == "__main__":
     t1 = open("topic_train.txt","w")
     t2 = open("topic_test.txt","w")
 
-    topic_num = 60
+    topic_num = 70
     topic_num1 = topic_num*2
     
     for line in train:
