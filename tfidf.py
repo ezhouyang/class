@@ -104,14 +104,14 @@ if __name__ == "__main__":
     extra_train,extra_test = [],[]
 
     print "读topic"
-    f1 = open("topic_train.txt")
+    f1 = open("topic_train4.txt")
     for line in f1.readlines():
         sp = line.split()
         sp = [float(j) for j in sp]
 
         extra_train.append(sp)
 
-    f2 = open("topic_test.txt")
+    f2 = open("topic_test4.txt")
     for line in f2.readlines():
         sp = line.split()
         sp = [float(j) for j in sp]
@@ -133,7 +133,7 @@ if __name__ == "__main__":
     #clf = KNeighborsClassifier(n_neighbors=1)
     #clf = LogisticRegression(penalty='l2',C=300,tol=1e-6)
     #clf = SGDClassifier(loss="log",n_iter=300, penalty="l2",alpha=0.0003)
-    clf = LogisticRegression(penalty='l2',dual=True,fit_intercept=False,C=2,tol=1e-9,class_weight=None, random_state=None, intercept_scaling=1.0)
+    clf = LogisticRegression(penalty='l2',dual=True,fit_intercept=False,C=1.9,tol=1e-9,class_weight=None, random_state=None, intercept_scaling=1.0)
     print "交叉验证"
     print np.mean(cross_validation.cross_val_score(clf,x,label,cv=20,scoring='roc_auc'))
     clf.fit(x,label)
