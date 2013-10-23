@@ -59,14 +59,14 @@ if __name__ == "__main__":
     train,test = [],[]
 
     print "读topic"
-    f1 = open("topic_train.txt")
+    f1 = open("topic_train6.txt")
     for line in f1.readlines():
         sp = line.split()
         sp = [float(j) for j in sp]
 
         train.append(sp)
 
-    f2 = open("topic_test.txt")
+    f2 = open("topic_test6.txt")
     for line in f2.readlines():
         sp = line.split()
         sp = [float(j) for j in sp]
@@ -83,7 +83,7 @@ if __name__ == "__main__":
 
     label = np.array(label)
 
-    clf = LogisticRegression(penalty='l2',dual=True,fit_intercept=True,C=30,tol=1e-9,class_weight=None, random_state=None, intercept_scaling=1.0)
+    clf = LogisticRegression(penalty='l2',dual=True,fit_intercept=True,C=20,tol=1e-9,class_weight=None, random_state=None, intercept_scaling=1.0)
     #clf = AdaBoostClassifier(n_estimators=100)
     #clf = SGDClassifier(loss="log",n_iter=300, penalty="l2",alpha=0.00005,fit_intercept=Tr1ue)#sgd 的训练结果也不错
     #clf = svm.SVC(C=1,degree=9,gamma=10,probability=True)
