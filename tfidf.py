@@ -43,14 +43,9 @@ def read_file():
             #text_train.append(row[2]+" "+row[0]+" "+row[3])
             text_train.append(row[2]+" "+row[0])
             #处理一下其他feature
-            row[17]=0
-            row[20]=0
-            row[21]=0
-            row[10]=0
-            row[19] = float(row[19])/100
-            row[22] = float(row[22])/200
-            row[23] = float(row[23])/20
-            extra_train.append([float(i)/100.0 for i in row[5:len(row)-1]])
+                
+            #extra_train.append([float(i)/100.0 for i in row[5:len(row)-1]])
+            extra_train.append([float(row[13])])
 
     f.close()
     print "read test"
@@ -65,14 +60,9 @@ def read_file():
             urlid.append(row[1])
             #text_test.append(row[2]+" "+row[0]+" "+row[3])
             text_test.append(row[2]+" "+row[0])
-            row[17]=0
-            row[20]=0
-            row[21]=0
-            row[10]=0
-            row[19] = float(row[19])/100
-            row[22] = float(row[22])/200
-            row[23] = float(row[23])/20
-            extra_test.append([float(i)/100.0 for i in row[5:len(row)]])
+
+            #extra_test.append([float(i)/100.0 for i in row[5:len(row)]])
+            extra_test.append([float(row[13])])
     
     return text_train,label,text_test,urlid,extra_train,extra_test
 
@@ -104,14 +94,14 @@ if __name__ == "__main__":
     extra_train,extra_test = [],[]
 
     print "读topic"
-    f1 = open("topic_train.txt")
+    f1 = open("topic_train6.txt")
     for line in f1.readlines():
         sp = line.split()
         sp = [float(j) for j in sp]
 
         extra_train.append(sp)
 
-    f2 = open("topic_test.txt")
+    f2 = open("topic_test6.txt")
     for line in f2.readlines():
         sp = line.split()
         sp = [float(j) for j in sp]
@@ -120,6 +110,7 @@ if __name__ == "__main__":
 
     extra_train = np.array(extra_train)
     extra_test  = np.array(extra_test)
+    print "topic num",extra_train.shape
 
     print "合并特征"
     x = sparse.hstack((x,extra_train)).tocsr()
@@ -133,7 +124,7 @@ if __name__ == "__main__":
     #clf = KNeighborsClassifier(n_neighbors=1)
     #clf = LogisticRegression(penalty='l2',C=300,tol=1e-6)
     #clf = SGDClassifier(loss="log",n_iter=300, penalty="l2",alpha=0.0003)
-    clf = LogisticRegression(penalty='l2',dual=True,fit_intercept=False,C=2.3,tol=1e-9,class_weight=None, random_state=None, intercept_scaling=1.0)
+    clf = LogisticRegression(penalty='l2',dual=True,fit_intercept=False,C=2.4,tol=1e-9,class_weight=None, random_state=None, intercept_scaling=1.0)
     print "交叉验证"
     print np.mean(cross_validation.cross_val_score(clf,x,label,cv=20,scoring='roc_auc'))
     clf.fit(x,label)
