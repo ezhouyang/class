@@ -45,7 +45,8 @@ def read_file():
             #处理一下其他feature
                 
             #extra_train.append([float(i)/100.0 for i in row[5:len(row)-1]])
-            extra_train.append([float(row[13])])
+            #extra_train.append([float(row[13]),float(row[6])/10.0,float(row[7])/10.0,float(row[8])/10.0,float(row[9])/10.0])
+            extra_train.append([float(row[7])])
 
     f.close()
     print "read test"
@@ -62,7 +63,9 @@ def read_file():
             text_test.append(row[2]+" "+row[0])
 
             #extra_test.append([float(i)/100.0 for i in row[5:len(row)]])
-            extra_test.append([float(row[13])])
+            #extra_test.append([float(row[13]),float(row[6])/10.0,float(row[7])/10.0,float(row[8])/10.0,float(row[9])/10.0])
+            extra_test.append([float(row[7])])
+
     
     return text_train,label,text_test,urlid,extra_train,extra_test
 
@@ -94,14 +97,14 @@ if __name__ == "__main__":
     extra_train,extra_test = [],[]
 
     print "读topic"
-    f1 = open("topic_train6.txt")
+    f1 = open("topic_train.txt")
     for line in f1.readlines():
         sp = line.split()
         sp = [float(j) for j in sp]
 
         extra_train.append(sp)
 
-    f2 = open("topic_test6.txt")
+    f2 = open("topic_test.txt")
     for line in f2.readlines():
         sp = line.split()
         sp = [float(j) for j in sp]
