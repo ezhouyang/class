@@ -97,14 +97,14 @@ if __name__ == "__main__":
     extra_train,extra_test = [],[]
 
     print "读topic"
-    f1 = open("topic_train.txt")
+    f1 = open("topic_train6.txt")
     for line in f1.readlines():
         sp = line.split()
         sp = [float(j) for j in sp]
 
         extra_train.append(sp)
 
-    f2 = open("topic_test.txt")
+    f2 = open("topic_test6.txt")
     for line in f2.readlines():
         sp = line.split()
         sp = [float(j) for j in sp]
