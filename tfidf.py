@@ -85,7 +85,7 @@ if __name__ == "__main__":
     train,label,test,urlid,extra_train1,extra_test1 = read_file()
     print "train length",len(train)
     print "test length",len(test)
-    vectorizer = TfidfVectorizer(sublinear_tf=True,min_df = 3,ngram_range=(1,2),smooth_idf=True,token_pattern=r'\w{1,}',use_idf=1,analyzer='word',strip_accents='unicode')
+    vectorizer = TfidfVectorizer(sublinear_tf=True,min_df = 3,ngram_range=(1,3),smooth_idf=True,token_pattern=r'\w{1,}',use_idf=1,analyzer='word',strip_accents='unicode')
     print "transform train to tf matrix"
     print "transform test to tf matrix"
     length_train = len(train)
@@ -127,7 +127,7 @@ if __name__ == "__main__":
     #clf = KNeighborsClassifier(n_neighbors=1)
     #clf = LogisticRegression(penalty='l2',C=300,tol=1e-6)
     #clf = SGDClassifier(loss="log",n_iter=300, penalty="l2",alpha=0.0003)
-    clf = LogisticRegression(penalty='l2',dual=True,fit_intercept=False,C=3.1,tol=1e-9,class_weight=None, random_state=None, intercept_scaling=1.0)
+    clf = LogisticRegression(penalty='l2',dual=True,fit_intercept=False,C=3.2,tol=1e-9,class_weight=None, random_state=None, intercept_scaling=1.0)
     print "交叉验证"
     print np.mean(cross_validation.cross_val_score(clf,x,label,cv=20,scoring='roc_auc'))
     clf.fit(x,label)
