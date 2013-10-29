@@ -123,7 +123,7 @@ if __name__ == "__main__":
 
     label = np.array(label)
 
-    clf = LogisticRegression(penalty='l1',C=3,tol=1e-9)
+    clf = LogisticRegression(penalty='l1',C=30,tol=1e-9)
 
     x = clf.fit_transform(x,label)
 
